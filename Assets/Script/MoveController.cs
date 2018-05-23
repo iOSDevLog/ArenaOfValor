@@ -2,6 +2,12 @@
 using System.Collections;
 
 public class MoveController : MonoBehaviour {
+    private Animator ani;
+
+    void Start()
+    {
+        ani = GetComponent<Animator>();
+    }
 
     void OnEnable()
     {
@@ -24,18 +30,21 @@ public class MoveController : MonoBehaviour {
 
     void OnJoystickMoveEnd(MovingJoystick move)
     {
-        if (move.joystickName == "MoveJoystick")
+        if (move.joystickName == "EasyJoystick")
         {
-            GetComponent<Animation>().CrossFade("idle");
+            // GetComponent<Animation>().CrossFade("idle");
+            ani.SetInteger("state", AnimState.IDLE);
         }
     }
     void OnJoystickMove(MovingJoystick move)
     {
-        if (move.joystickName != "MoveJoystick")
+        Debug.LogError("-------------" + move.joystickName);
+        if (move.joystickName != "EasyJoystick")
         {
             return;
         }
-        
+
+        Debug.LogError("、、、、、、、、、、、、、、、、、-");
 
         float joyPositionX = move.joystickAxis.x;
         float joyPositionY = move.joystickAxis.y;
@@ -47,7 +56,8 @@ public class MoveController : MonoBehaviour {
             //移动玩家的位置（按朝向位置移动）
             transform.Translate(Vector3.forward * Time.deltaTime * 5);
             //播放奔跑动画
-            GetComponent<Animation>().CrossFade("run");
+            // GetComponent<Animation>().CrossFade("run");
+            ani.SetInteger("state", AnimState.ATTACK1);
         }
     }
 }

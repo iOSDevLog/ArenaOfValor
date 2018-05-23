@@ -9,14 +9,15 @@ public class GUIEasyJoystickInspector : Editor{
 	GUIStyle paddingStyle1;
 
 	public GUIEasyJoystickInspector(){
-
-		paddingStyle1 = new GUIStyle();
-		paddingStyle1.padding = new RectOffset(15,0,0,0);
 	}
 	
-	void OnEnable(){
-			
-		EasyJoystick t = (EasyJoystick)target;
+	void OnEnable()
+    {
+
+        paddingStyle1 = new GUIStyle();
+        paddingStyle1.padding = new RectOffset(15, 0, 0, 0);
+
+        EasyJoystick t = (EasyJoystick)target;
 		if (t.areaTexture==null){
 			t.areaTexture = (Texture)Resources.Load("RadialJoy_Area");
 			EditorUtility.SetDirty(t);
